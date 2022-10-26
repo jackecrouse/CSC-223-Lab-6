@@ -79,7 +79,11 @@ public class Point implements Comparable<Point>
 	 */
 	public static int LexicographicOrdering(Point p1, Point p2)
 	{
-		// TODO
+		if (p1._x < p2._x) return -1;
+		if (p1._x > p2._x) return 1;
+		if (p1._y < p2._y) return -1;
+		if (p1._y > p2._y) return 1;
+		return 0;
 	}
 
 	@Override
