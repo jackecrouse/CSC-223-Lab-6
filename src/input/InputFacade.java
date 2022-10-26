@@ -27,7 +27,9 @@ public class InputFacade
 	 */
 	public static FigureNode extractFigure(String filename)
 	{
-        // TODO
+        if(filename == null) return null;
+        
+        
 	}
 	
 	/**

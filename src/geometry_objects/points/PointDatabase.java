@@ -1,6 +1,7 @@
 package geometry_objects.points;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ public class PointDatabase
     
 	public PointDatabase()
 	{
-        // TODO
+        _factory = new PointNamingFactory(); 
 	}
 
 	public PointDatabase(List<Point> points)
@@ -58,7 +59,7 @@ public class PointDatabase
 	 */
 	public String getName(double x, double y)
 	{
-        // TODO
+		//TODO
 	}
 	public String getName(Point pt)
 	{

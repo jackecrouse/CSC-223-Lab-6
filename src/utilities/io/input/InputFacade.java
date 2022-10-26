@@ -1,4 +1,4 @@
-package input;
+package utilities.io.input;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,6 +16,7 @@ import input.components.FigureNode;
 import input.components.point.PointNode;
 import input.components.segment.SegmentNode;
 import input.parser.JSONParser;
+import utilities.io.FileUtilities;
 
 public class InputFacade
 {
@@ -25,9 +26,18 @@ public class InputFacade
 	 * @param filename -- the name of a file
 	 * @return a FigureNode object corresponding to the input file.
 	 */
+	
+	
+	//might not work :')
 	public static FigureNode extractFigure(String filename)
 	{
-        // TODO
+        String rawFile = FileUtilities.readFileFilterComments(filename);
+
+		GeometryBuilder builder = new GeometryBuilder();
+        JSONParser parser = new JSONParser(builder);
+        FigureNode figure = (FigureNode) parser.parse(rawFile);
+        
+        return figure;
 	}
 	
 	/**
@@ -42,4 +52,5 @@ public class InputFacade
 	{
 		// TODO
 	}
+	
 }

@@ -32,7 +32,7 @@ public class PointNamingFactory
 
 	public PointNamingFactory()
 	{
-		// TODO
+		
 	}
 
 	/**
