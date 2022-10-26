@@ -3,7 +3,10 @@ package geometry_objects.points;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+
+import utilities.math.MathUtilities;
 
 /*
  * Given a pair of coordinates; generate a unique name for it;
@@ -54,7 +57,9 @@ public class PointNamingFactory
 	 */
 	public Point put(Point pt)
 	{
-		// TODO
+		Point oldPoint = _database.put(pt, pt);
+		if (oldPoint == null) return pt;
+		return oldPoint;
 	}
 
 	/**
@@ -64,7 +69,7 @@ public class PointNamingFactory
 	 */
 	public Point put(double x, double y)
 	{
-		// TODO
+		return this.put(new Point(x,y));
 	}
 
 	/**
@@ -82,7 +87,8 @@ public class PointNamingFactory
 	 */
 	public Point put(String name, double x, double y)
 	{
-		// TODO
+
+		return this.put(new Point(name, x, y)); // come back
 	}    
 
 	/**
@@ -94,11 +100,13 @@ public class PointNamingFactory
 	 */
 	public Point get(double x, double y)
 	{
-		// TODO
+		return this.get(new Point(x,y));
+		
 	}	
+	
 	public Point get(Point pt)
 	{
-		// TODO
+		return _database.get(pt);
 	}
 
 	/**
@@ -116,7 +124,7 @@ public class PointNamingFactory
 	 */
 	private Point lookupExisting(String name, double x, double y)
 	{
-		// TODO
+		
 	}  
 
 	/**
