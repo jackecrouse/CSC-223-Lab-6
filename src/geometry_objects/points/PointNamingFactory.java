@@ -100,8 +100,14 @@ public class PointNamingFactory
 	 */
 	public Point get(double x, double y)
 	{
-		return this.get(new Point(x,y));
-		
+		for(var dbPoint : _database.keySet())
+		{
+			if(dbPoint._x == x && dbPoint._y == y)
+			{
+				return dbPoint;
+			}
+		}
+		return null;
 	}	
 	
 	public Point get(Point pt)

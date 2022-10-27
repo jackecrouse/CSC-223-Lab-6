@@ -14,6 +14,7 @@ public class Point implements Comparable<Point>
 	public static final String ANONYMOUS = "__UNNAMED";
 
 	public static final Point ORIGIN;
+	
 	static
 	{
 		ORIGIN = new Point("origin", 0, 0);
