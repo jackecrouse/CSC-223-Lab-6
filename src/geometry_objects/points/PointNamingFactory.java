@@ -111,16 +111,9 @@ public class PointNamingFactory
 	
 	public Point get(Point pt)
 	{
-		//return _database.get(pt); Check later...
+		if (pt == null) return null;
 		
-		for(Point dbPoint : _database.keySet())
-		{
-			if(dbPoint._x == pt._x && dbPoint._y == pt._y)
-			{
-				return dbPoint;
-			}
-		}
-		return null;
+		return this.get(pt._x, pt._y);
 	}
 
 	/**
@@ -175,7 +168,7 @@ public class PointNamingFactory
 	 * @return simple containment; no updating
 	 */
 	public boolean contains(double x, double y) 
-	{ 
+	{ 		
 		for(Point point: _database.keySet())
 		{
 			if(point._x == x && point._y == y) return true;
@@ -188,6 +181,8 @@ public class PointNamingFactory
 	
 	
 	public boolean contains(Point p) { 
+		
+		if (p == null) return false;
 
 		for(Point point: _database.keySet())
 		{
