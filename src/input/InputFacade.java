@@ -1,24 +1,27 @@
 package input;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.AbstractMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import geometry_objects.Segment;
 import input.builder.GeometryBuilder;
-import input.components.ComponentNode;
 import input.components.FigureNode;
 import input.components.point.PointNode;
 import input.components.segment.SegmentNode;
 import input.parser.JSONParser;
 
+/*
+ * The InputFacade class includes methods that give main functionality to this program.
+ * It allows for the easy extraction of a FigureNode out of a JSONFile using the extractFigure() method. 
+ * From that FigureNode, it can convert the PointNodes and SegmentNodes into Points and Segments as a pair:
+ * <PointDatabase, Set<Segment>>, which provide more meaningful geometric functionality.
+ * 
+ * @author Sophie Ngo
+ */
 public class InputFacade
 {
 	/**
@@ -50,6 +53,8 @@ public class InputFacade
 	 */
 	public static Map.Entry<PointDatabase, Set<Segment>> toGeometryRepresentation(String filename)
 	{
+		if(filename == null) return null;
+		
 		FigureNode figure = extractFigure(filename);
 		
 		PointDatabase pdb = new PointDatabase();
@@ -72,7 +77,4 @@ public class InputFacade
 		return new AbstractMap.SimpleEntry<PointDatabase, Set<Segment>>(pdb, segSet);
 	
 	}
-
-	
-	
 }
