@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.AbstractMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import geometry_objects.points.Point;
@@ -29,6 +31,12 @@ public class InputFacade
 	{
         if(filename == null) return null;
         
+        GeometryBuilder geoBuilder = new GeometryBuilder();
+		JSONParser parser = new JSONParser(geoBuilder);
+
+		String figureStr = utilities.io.FileUtilities.readFileFilterComments(filename);
+		
+		return (FigureNode) parser.parse(figureStr);
         
 	}
 	
@@ -42,6 +50,29 @@ public class InputFacade
 	 */
 	public static Map.Entry<PointDatabase, Set<Segment>> toGeometryRepresentation(String filename)
 	{
-		// TODO
+		FigureNode figure = extractFigure(filename);
+		
+		PointDatabase pdb = new PointDatabase();
+		
+		// convert every PointNode to a Point, then add each to our PointDatabase
+		for (PointNode pNode : figure.getPointsDatabase().getPointsSet()) {
+			pdb.put(pNode.getName(), pNode.getX(), pNode.getY());
+		}
+		
+		Set<Segment> segSet = new LinkedHashSet<Segment>();
+		
+		// convert every SegmentNode to a Segment, then add each to our set of Segments
+		for (SegmentNode sNode : figure.getSegments().asUniqueSegmentList()) {
+			// must first convert each PointNode of segment to Point
+			Point p1 = new Point(sNode.getPoint1().getX(), sNode.getPoint1().getY());
+			Point p2 = new Point(sNode.getPoint2().getX(), sNode.getPoint2().getY());
+			segSet.add(new Segment(p1, p2));
+		}
+		
+		return new AbstractMap.SimpleEntry<PointDatabase, Set<Segment>>(pdb, segSet);
+	
 	}
+
+	
+	
 }
