@@ -21,6 +21,7 @@ public class PointDatabase
 	// The factory is the central means of representing all
     // points in a figure
     protected PointNamingFactory _factory;
+    
 
     public Set<Point> getPoints() { return _factory.getAllPoints(); }
     
@@ -31,7 +32,7 @@ public class PointDatabase
 
 	public PointDatabase(List<Point> points)
 	{
-        // TODO
+        _factory = new PointNamingFactory(points);
 	}
 
 	public int size() { return _factory.size(); }
@@ -59,7 +60,7 @@ public class PointDatabase
 	 */
 	public String getName(double x, double y)
 	{
-		//TODO
+		for(var point: )
 	}
 	public String getName(Point pt)
 	{

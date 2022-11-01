@@ -87,7 +87,6 @@ public class PointNamingFactory
 	 */
 	public Point put(String name, double x, double y)
 	{
-
 		return this.put(new Point(name, x, y)); // come back
 	}    
 
@@ -100,7 +99,7 @@ public class PointNamingFactory
 	 */
 	public Point get(double x, double y)
 	{
-		for(var dbPoint : _database.keySet())
+		for(Point dbPoint : _database.keySet())
 		{
 			if(dbPoint._x == x && dbPoint._y == y)
 			{
@@ -112,7 +111,16 @@ public class PointNamingFactory
 	
 	public Point get(Point pt)
 	{
-		return _database.get(pt);
+		//return _database.get(pt); Check later...
+		
+		for(Point dbPoint : _database.keySet())
+		{
+			if(dbPoint._x == pt._x && dbPoint._y == pt._y)
+			{
+				return dbPoint;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -130,7 +138,8 @@ public class PointNamingFactory
 	 */
 	private Point lookupExisting(String name, double x, double y)
 	{
-		
+		Point pPoint = new Point(name, x, y);
+		return get(pPoint); 
 	}  
 
 	/**
@@ -148,7 +157,16 @@ public class PointNamingFactory
 	 */
 	private Point createNewPoint(String name, double x, double y)
 	{
-		// TODO
+		Point pPoint = new Point(name, x, y);
+		Point dPoint = get(pPoint); 
+		
+		if(dPoint == null) 
+		{
+			_database.put(pPoint, pPoint); 
+			return pPoint;
+		}
+		
+		return dPoint;
 	}
 
 	/**
@@ -156,8 +174,27 @@ public class PointNamingFactory
 	 * @param y -- single coordinate
 	 * @return simple containment; no updating
 	 */
-	public boolean contains(double x, double y) { /* TODO */ }
-	public boolean contains(Point p) { /* TODO */ }
+	public boolean contains(double x, double y) 
+	{ 
+		for(Point point: _database.keySet())
+		{
+			if(point._x == x && point._y == y) return true;
+		}
+		
+		return false;
+		
+	}
+	
+	
+	
+	public boolean contains(Point p) { 
+
+		for(Point point: _database.keySet())
+		{
+			if(point == p) return true;
+		}
+		return false;
+	}
 
 	/**
 	 * @return acquires and returns the next name in sequence; also
@@ -165,7 +202,7 @@ public class PointNamingFactory
 	 */
 	private String getCurrentName()
 	{
-        // TODO
+        return _currentName;
 	}
 
 	/**
@@ -174,7 +211,12 @@ public class PointNamingFactory
 	 */
 	private  void updateName()
 	{
-        // TODO
+        if(_currentName.contains("Z")) return;
+        
+        for(char c: _currentName.toCharArray())
+        {
+        	c = (char) ((int) c + 1); //Adds 1 to the ASCII code
+        }
 	}
 
 	/**
@@ -182,7 +224,7 @@ public class PointNamingFactory
 	 */
 	public  Set<Point> getAllPoints()
 	{
-        // TODO
+        return _database.keySet();
 	}
 
 	public void clear() { _database.clear(); }
@@ -191,6 +233,14 @@ public class PointNamingFactory
 	@Override
 	public String toString()
 	{
-        // TODO
+		String res = "[";
+		
+		for(Point p: _database.keySet())
+		{
+			res += "(" + p._name + " : " + p._x + ", " + p._y + ")";
+		}
+		
+		return res += "]";
+        
 	}
 }
