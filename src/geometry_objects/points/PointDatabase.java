@@ -61,7 +61,7 @@ public class PointDatabase
 	public String getName(double x, double y)
 	{
 		Point p = _factory.get(x, y);
-		return p._name;
+		return p == null ? null : p._name;
 	}
 	
 	

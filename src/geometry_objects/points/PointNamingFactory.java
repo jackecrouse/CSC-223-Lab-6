@@ -208,10 +208,15 @@ public class PointNamingFactory
 	{
         if(_currentName.contains("Z")) return;
         
-        for(char c: _currentName.toCharArray())
+        char[] res = _currentName.toCharArray();
+        
+        for(char c: res)
         {
         	c = (char) ((int) c + 1); //Adds 1 to the ASCII code
         }
+        
+        _currentName = res.toString();
+        
 	}
 
 	/**
@@ -232,8 +237,10 @@ public class PointNamingFactory
 		
 		for(Point p: _database.keySet())
 		{
-			res += "(" + p._name + " : " + p._x + ", " + p._y + ")";
+			res += "(" + p._name + " : " + p._x + ", " + p._y + "), ";
 		}
+		
+		res = res.substring(0, res.length() - 2);
 		
 		return res += "]";
         
