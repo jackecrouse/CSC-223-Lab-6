@@ -49,7 +49,7 @@ public class PointDatabase
 	 */
 	public void put(String name, double x, double y)
 	{
-        // TODO
+		_factory.put(new Point(name, x, y));
 	}
 
 	/**
@@ -60,11 +60,15 @@ public class PointDatabase
 	 */
 	public String getName(double x, double y)
 	{
-		for(var point: )
+		Point p = _factory.get(x, y);
+		return p._name;
 	}
+	
+	
+	
 	public String getName(Point pt)
 	{
-        // TODO
+		return _factory.get(pt)._name;
 	}
 
 	/**
@@ -75,7 +79,11 @@ public class PointDatabase
 	 */
 	public Point getPoint(String name)
 	{
-        // TODO
+        for (var point:_factory.getAllPoints())
+        {
+        	if(point._name.equals(name)) {return point;}
+        }
+        return null;
 	}
 
 	/**
@@ -87,7 +95,7 @@ public class PointDatabase
 	 */
 	public Point getPoint(Point pt)
 	{
-        // TODO
+        return _factory.get(pt);
 	}
 
 	/**
@@ -98,6 +106,6 @@ public class PointDatabase
 	 */
 	public Point getPoint(double x, double y)
 	{
-        // TODO
+        return _factory.get(x, y);
 	}
 }
