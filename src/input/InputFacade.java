@@ -56,7 +56,18 @@ public class InputFacade
 		if(filename == null) return null;
 		
 		FigureNode figure = extractFigure(filename);
+		PointDatabase pdb = InputFacade.getPointDatabaseFromFigure(figure);
+		Set<Segment> segSet = InputFacade.getSegmentSetFromFigure(figure);
 		
+		return new AbstractMap.SimpleEntry<PointDatabase, Set<Segment>>(pdb, segSet);
+	}
+	
+	/**
+	 * Given a FigureNode, take its PointNodeDatabase and convert it into a PointDatabase
+	 * @param figure
+	 * @return PointDatabase that represents the PointNodeDatabase
+	 */
+	public static PointDatabase getPointDatabaseFromFigure(FigureNode figure) {
 		PointDatabase pdb = new PointDatabase();
 		
 		// convert every PointNode to a Point, then add each to our PointDatabase
@@ -64,6 +75,15 @@ public class InputFacade
 			pdb.put(pNode.getName(), pNode.getX(), pNode.getY());
 		}
 		
+		return pdb;
+	}
+	
+	/**
+	 * Given a FigureNode, take its SegmentNodeDatabase and convert it into a Set of Segments
+	 * @param figure
+	 * @return Set<Segments> that represents the SegmentNodeDatabase
+	 */
+	public static Set<Segment> getSegmentSetFromFigure(FigureNode figure) {
 		Set<Segment> segSet = new LinkedHashSet<Segment>();
 		
 		// convert every SegmentNode to a Segment, then add each to our set of Segments
@@ -74,7 +94,7 @@ public class InputFacade
 			segSet.add(new Segment(p1, p2));
 		}
 		
-		return new AbstractMap.SimpleEntry<PointDatabase, Set<Segment>>(pdb, segSet);
-	
+		return segSet;
 	}
+	
 }
