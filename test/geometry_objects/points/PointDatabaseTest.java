@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 class PointDatabaseTest {
 	
-	
 	public PointDatabase Builder()
 	{
 		ArrayList<Point> arr = new ArrayList<Point>();
@@ -169,13 +168,58 @@ class PointDatabaseTest {
 	}
 
 	@Test
-	void testGetPointPoint() {
-		fail("Not yet implemented");
+	void testGetPointPoint() 
+	{
+		Point p1 = new Point(0,0);
+		Point p2 = new Point("B",0,2);
+		Point p3 = new Point(2,2);
+		Point p4 = new Point(2,0);
+		
+		ArrayList<Point> ptArray = new ArrayList<Point>();
+		
+		ptArray.add(p1);
+		ptArray.add(p2);
+		ptArray.add(p3);
+		ptArray.add(p4);
+		
+		PointDatabase pdb = new PointDatabase(ptArray); 
+		
+		Point pt = pdb.getPoint(p1);
+		
+		assertEquals(pt._x, 0);
+		assertEquals(pt._y, 0);
+		assertEquals(pt._name, "__UNNAMED");
+
+		
 	}
 
 	@Test
-	void testGetPointDoubleDouble() {
-		fail("Not yet implemented");
+	void testGetPointDoubleDouble() 
+	{
+		Point p1 = new Point("A", 0,0);
+		Point p2 = new Point("B",0,2);
+		Point p3 = new Point(2,2);
+		Point p4 = new Point("D",2,0);
+		
+		ArrayList<Point> ptArray = new ArrayList<Point>();
+		
+		ptArray.add(p1);
+		ptArray.add(p2);
+		ptArray.add(p3);
+		ptArray.add(p4);
+		
+		PointDatabase pdb = new PointDatabase(ptArray); 
+	
+		Point pt = pdb.getPoint(0, 0);
+		assertEquals(pt._name, "A");
+		
+		Point pt2 = pdb.getPoint(0, 2);
+		assertEquals(pt2._name, "B");
+
+		Point pt3 = pdb.getPoint(2, 2);
+		assertEquals(pt3._name, "__UNNAMED");
+
+
 	}
 
 }
