@@ -11,6 +11,8 @@ public class PointNamingFactoryTest {
 	 * makes a new list of points
 	 * @return arrayList<Point> arr
 	 */
+	
+	@Test
 	public static List makePointList() {
 		ArrayList<Point> arr = new ArrayList<Point>();
 		Point p1 = new Point(0,0);
@@ -23,6 +25,7 @@ public class PointNamingFactoryTest {
 		return arr;
 	}
 
+	@Test
 	public void putTest() {
 		Point contained = new Point(0,0);
 		Point uncontained = new Point(3,3);
