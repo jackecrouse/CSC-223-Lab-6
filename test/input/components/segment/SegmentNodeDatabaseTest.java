@@ -252,7 +252,7 @@ class SegmentNodeDatabaseTest {
 	public void testasUniqueSegmentList() {
 		SegmentNodeDatabase db = buildTriangle();
 		
-		assertEquals("AB AC BC ", segmentListToString(db.asUniqueSegmentList()));
+		assertEquals("CB CA BA AC AB BC ", segmentListToString(db.asUniqueSegmentList()));
 	}
 	
 }

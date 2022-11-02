@@ -13,7 +13,7 @@ public class PointNamingFactoryTest {
 	 * @return arrayList<Point> arr
 	 */
 	
-	public static List makePointList() {
+	public static List<Point> makePointList() {
 		ArrayList<Point> arr = new ArrayList<Point>();
 		Point p1 = new Point(0,0);
 		Point p2 = new Point(0,1);
@@ -39,7 +39,7 @@ public class PointNamingFactoryTest {
 		assertEquals(empty.put(uncontained), uncontained);
 		assertEquals(empty.put(uncontained2), uncontained2);
 		assertEquals(full.put(uncontained), uncontained);
-		assertEquals(full.put(contained), contained);
+		assertTrue(full.put(contained).equals(contained));
 	}
 	@Test
 	public void putTestXY() {

@@ -70,6 +70,13 @@ public class Point implements Comparable<Point>
 		return Double.valueOf(MathUtilities.removeLessEpsilon(_x)).hashCode() +
 			   Double.valueOf(MathUtilities.removeLessEpsilon(_y)).hashCode();
 	}
+	
+	public boolean equals(Point pt)
+	{
+		return MathUtilities.doubleEquals(_x, pt._x) && MathUtilities.doubleEquals(_y, pt._y);
+	}
+	
+	
 
 	/**
 	 * 
@@ -97,4 +104,5 @@ public class Point implements Comparable<Point>
 
 		return Point.LexicographicOrdering(this, that);
 	}
+	
 }

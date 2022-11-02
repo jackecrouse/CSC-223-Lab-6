@@ -46,7 +46,7 @@ public class PointNamingFactory
 	{
 		_database = new LinkedHashMap<Point, Point>();
 		for (Point p : points) {
-			_database.put(p, p); // call own put
+			this.put(p); // call own put
 		}
 	}
 
@@ -57,9 +57,8 @@ public class PointNamingFactory
 	 */
 	public Point put(Point pt)
 	{
-		Point oldPoint = _database.put(pt, pt);
-		if (oldPoint == null) return pt;
-		return oldPoint;
+		_database.put(pt, pt);
+		return lookupExisting(pt.getName(), pt.getX(), pt.getY());
 	}
 
 	/**
@@ -87,7 +86,8 @@ public class PointNamingFactory
 	 */
 	public Point put(String name, double x, double y)
 	{
-		return this.put(new Point(name, x, y)); // come back
+		Point pt = new Point(name, x, y);
+		return this.put(pt);
 	}    
 
 	/**
@@ -99,21 +99,17 @@ public class PointNamingFactory
 	 */
 	public Point get(double x, double y)
 	{
-		for(Point dbPoint : _database.keySet())
-		{
-			if(dbPoint._x == x && dbPoint._y == y) // implement point equals and use it!
-			{
-				return dbPoint;
-			}
-		}
-		return null;
+		Point pt = new Point(x, y);
+		return get(pt);
 	}	
 	
 	public Point get(Point pt)
 	{
-		if (pt == null) return null;
-		
-		return this.get(pt._x, pt._y);
+		for(Point p: getAllPoints())
+		{
+			if(pt.equals(p)) return p;
+		}
+		return null;
 	}
 
 	/**
@@ -131,8 +127,16 @@ public class PointNamingFactory
 	 */
 	private Point lookupExisting(String name, double x, double y) // call create
 	{
-		Point pPoint = new Point(name, x, y);
-		return get(pPoint); 
+		for(Point p: getAllPoints())
+		{
+			if(p.equals(new Point(name, x, y)))
+			{
+				Point old = p;
+				if(p._name.equals("__UNNAMED") && !name.equals(Point.ANONYMOUS)) p._name = name;
+				return old;
+			}
+		}
+		return createNewPoint(name, x, y);
 	}  
 
 	/**
@@ -150,16 +154,8 @@ public class PointNamingFactory
 	 */
 	private Point createNewPoint(String name, double x, double y)
 	{
-		Point pPoint = new Point(name, x, y);
-		Point dPoint = get(pPoint); 
-		
-		if(dPoint == null) 
-		{
-			_database.put(pPoint, pPoint); 
-			return pPoint;
-		}
-		
-		return dPoint;
+		Point p = new Point(name, x, y);
+		return p;
 	}
 
 	/**
@@ -169,13 +165,8 @@ public class PointNamingFactory
 	 */
 	public boolean contains(double x, double y) 
 	{ 		
-		for(Point point: _database.keySet())
-		{
-			if(point._x == x && point._y == y) return true; // point equals
-		}
-		
-		return false;
-		
+		Point pt = this.get(x, y);
+		return pt != null;
 	}
 	
 	
@@ -184,9 +175,9 @@ public class PointNamingFactory
 		
 		if (p == null) return false;
 
-		for(Point point: _database.keySet())
+		for(Point point: getAllPoints())
 		{
-			if(point == p) return true; // point equals
+			if(point.equals(p)) return true; // point equals
 		}
 		return false;
 	}
@@ -197,7 +188,9 @@ public class PointNamingFactory
 	 */
 	private String getCurrentName()
 	{
-        return _currentName;
+        String oldName = _currentName;
+        updateName();
+        return oldName;
 	}
 
 	/**
@@ -208,14 +201,11 @@ public class PointNamingFactory
 	{
         if(_currentName.contains("Z")) return;
         
-        char[] res = _currentName.toCharArray();
+        char[] c =  _currentName.toCharArray();
         
-        for(char c: res)
-        {
-        	c = (char) ((int) c + 1); //Adds 1 to the ASCII code
-        }
+        c[0] = (char) ((int) c[0] + 1); //Adds 1 to the ASCII code
         
-        _currentName = res.toString();
+        _currentName = c.toString();
         
 	}
 
@@ -230,6 +220,8 @@ public class PointNamingFactory
 	public void clear() { _database.clear(); }
 	public int size() { return _database.size(); }
 
+	
+
 	@Override
 	public String toString()
 	{
@@ -237,14 +229,12 @@ public class PointNamingFactory
 		
 		String res = "[";
 		
-		for(Point p: _database.keySet())
+		for(Point p: getAllPoints())
 		{
 			res += "(" + p._name + " : " + p._x + ", " + p._y + "), ";
 		}
 		
 		res = res.substring(0, res.length() - 2);
-		
 		return res += "]";
-        
 	}
 }
