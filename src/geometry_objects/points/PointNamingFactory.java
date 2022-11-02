@@ -171,15 +171,9 @@ public class PointNamingFactory
 	
 	
 	
-	public boolean contains(Point p) { 
-		
-		if (p == null) return false;
-
-		for(Point point: getAllPoints())
-		{
-			if(point.equals(p)) return true; // point equals
-		}
-		return false;
+	public boolean contains(Point p) 
+	{ 	
+		return contains(p.getX(), p.getY());
 	}
 
 	/**
