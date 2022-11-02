@@ -94,7 +94,6 @@ public class InputFacade
 			Point p2 = new Point(sNode.getPoint2().getName(), sNode.getPoint2().getX(), sNode.getPoint2().getY());
 			segSet.add(new Segment(p1, p2));
 		}
-		
 		return segSet;
 	}
 	

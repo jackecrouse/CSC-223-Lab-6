@@ -3,6 +3,7 @@ package input;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -65,21 +66,29 @@ public class InputFacadeTest {
 		assertTrue(new Point(1.0, 0.0).equals(actual.getPoint(1.0, 0.0)));
 	}
 	
+	
+	
+	
+	
 	@Test
 	void test_getSegmentSetFromFigure_oneSegment() {
 		Map<PointNode, Set<PointNode>> adj = new HashMap<PointNode, Set<PointNode>>();
-		// putting [ "A" : "B" ]
-		adj.put(new PointNode("A",0,0), new HashSet(Arrays.asList(new PointNode("B",1,1))));
+		// putting [ "A" : "B" ] 
+		adj.put(new PointNode("A",0,0), new LinkedHashSet(Arrays.asList(new PointNode("B",1,1))));
 		
 		SegmentNodeDatabase sdb = new SegmentNodeDatabase(adj);
 		FigureNode figure = new FigureNode("desc", null, sdb);
 		
 		Set<Segment> expected = new LinkedHashSet<Segment>(Arrays.asList(
 				new Segment(new Point("A",0,0), new Point("B",1,1))));
+		
 		Set<Segment> actual = InputFacade.getSegmentSetFromFigure(figure);
 		
-		
 		assertEquals(expected, actual);
+		assertEquals(expected.hashCode(), actual.hashCode());
+		
+		
+		
 	}
 	
 	@Test
@@ -93,7 +102,7 @@ public class InputFacadeTest {
 		SegmentNodeDatabase sdb = new SegmentNodeDatabase(adj);
 		FigureNode figure = new FigureNode("desc", null, sdb);
 		
-		Set<Segment> expected = new HashSet<Segment>(Arrays.asList(
+		Set<Segment> expected = new LinkedHashSet<Segment>(Arrays.asList(
 				new Segment(new Point("A",0,0), new Point("B",1,1)),
 				new Segment(new Point("A",0,0), new Point("C",2,2))));
 		Set<Segment> actual = InputFacade.getSegmentSetFromFigure(figure);
