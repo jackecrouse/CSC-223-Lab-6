@@ -132,7 +132,10 @@ public class PointNamingFactoryTest {
 	}
 	@Test
 	public void toSrintTest() {
+
 		PointNamingFactory pnf = new PointNamingFactory();
+
+		System.out.println(pnf.toString());
 
 		assertEquals(pnf.toString(), "[]");
 
@@ -140,7 +143,7 @@ public class PointNamingFactoryTest {
 		pnf.put("b", 10, 10);
 		pnf.put("c", -100, -100);
 		
-		assertEquals(pnf.toString(), "[(a : 0.0, 0.0)(b : 10.0, 10.0)(c : -100.0, -100.0)]");
+		assertEquals(pnf.toString(), "[(a : 0.0, 0.0), (b : 10.0, 10.0), (c : -100.0, -100.0)]");
 		
 		}
 	

@@ -233,6 +233,8 @@ public class PointNamingFactory
 	@Override
 	public String toString()
 	{
+		if(_database.size() == 0) return "[]";
+		
 		String res = "[";
 		
 		for(Point p: _database.keySet())
