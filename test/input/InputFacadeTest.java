@@ -107,6 +107,10 @@ public class InputFacadeTest {
 				new Segment(new Point("A",0,0), new Point("C",2,2))));
 		Set<Segment> actual = InputFacade.getSegmentSetFromFigure(figure);
 		
+		System.out.println(new Point("A",0,0).equals(new Point("A",0,0)));
+		
+		
+		
 		assertEquals(expected, actual);
 	}
 	

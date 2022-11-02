@@ -87,6 +87,9 @@ public class Point implements Comparable<Point>
 		return 0;
 	}
 
+	
+	
+	
 	@Override
 	public int compareTo(Point that)
 	{

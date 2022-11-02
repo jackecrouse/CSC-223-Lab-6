@@ -55,7 +55,10 @@ public class Segment extends GeometricObject
 	 * @param pt -- a point
 	 * @return true if @pt is one of the endpoints of this segment
 	 */
-	public boolean has(Point pt) { return _point1.equals(pt) || _point2.equals(pt); }
+	public boolean has(Point pt) { 
+		//return _point1.equals(pt) || _point2.equals(pt); 
+		return _point1.compareTo(pt) == 0 ||_point2.compareTo(pt) == 0;
+	}
 
 	/*
 	 * @return true if this segment is horizontal (by analysis of both endpoints having same y-coordinate)
