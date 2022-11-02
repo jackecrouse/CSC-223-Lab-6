@@ -90,8 +90,8 @@ public class InputFacade
 		// convert every SegmentNode to a Segment, then add each to our set of Segments
 		for (SegmentNode sNode : figure.getSegments().asUniqueSegmentList()) {
 			// must first convert each PointNode of segment to Point
-			Point p1 = new Point(sNode.getPoint1().getX(), sNode.getPoint1().getY());
-			Point p2 = new Point(sNode.getPoint2().getX(), sNode.getPoint2().getY());
+			Point p1 = new Point(sNode.getPoint1().getName(), sNode.getPoint1().getX(), sNode.getPoint1().getY());
+			Point p2 = new Point(sNode.getPoint2().getName(), sNode.getPoint2().getX(), sNode.getPoint2().getY());
 			segSet.add(new Segment(p1, p2));
 		}
 		

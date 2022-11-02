@@ -6,6 +6,7 @@ import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -73,9 +74,10 @@ public class InputFacadeTest {
 		SegmentNodeDatabase sdb = new SegmentNodeDatabase(adj);
 		FigureNode figure = new FigureNode("desc", null, sdb);
 		
-		Set<Segment> expected = new HashSet<Segment>(Arrays.asList(
+		Set<Segment> expected = new LinkedHashSet<Segment>(Arrays.asList(
 				new Segment(new Point("A",0,0), new Point("B",1,1))));
-		PointDatabase actual = InputFacade.getPointDatabaseFromFigure(figure);
+		Set<Segment> actual = InputFacade.getSegmentSetFromFigure(figure);
+		
 		
 		assertEquals(expected, actual);
 	}
@@ -94,7 +96,7 @@ public class InputFacadeTest {
 		Set<Segment> expected = new HashSet<Segment>(Arrays.asList(
 				new Segment(new Point("A",0,0), new Point("B",1,1)),
 				new Segment(new Point("A",0,0), new Point("C",2,2))));
-		PointDatabase actual = InputFacade.getPointDatabaseFromFigure(figure);
+		Set<Segment> actual = InputFacade.getSegmentSetFromFigure(figure);
 		
 		assertEquals(expected, actual);
 	}
