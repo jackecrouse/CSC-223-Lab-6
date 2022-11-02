@@ -153,19 +153,21 @@ public class SegmentNodeDatabase implements ComponentNode {
 	 * @return a unique segmentList
 	 */
 	public List<SegmentNode> asUniqueSegmentList() {
-		//unique, CANNOT have duplicate segments
-		List<SegmentNode> segmentList = new ArrayList<SegmentNode>();
-		//loop through each list in adjLists
-		for (Map.Entry<PointNode, Set<PointNode>> OuterPoint: _adjLists.entrySet()) {
-			//loop through list values
-			for (PointNode value: OuterPoint.getValue()) {
-				SegmentNode tempSegment = new SegmentNode(OuterPoint.getKey(), value);
-				if (!(this.hasDirectedSegment(OuterPoint.getKey(), value, segmentList))) {
-					segmentList.add(tempSegment);
-				}
-			}
-		}
-		return segmentList;
+//		//unique, CANNOT have duplicate segments
+//		List<SegmentNode> segmentList = new ArrayList<SegmentNode>();
+//		//loop through each list in adjLists
+//		for (Map.Entry<PointNode, Set<PointNode>> OuterPoint: _adjLists.entrySet()) {
+//			//loop through list values
+//			for (PointNode value: OuterPoint.getValue()) {
+//				SegmentNode tempSegment = new SegmentNode(OuterPoint.getKey(), value);
+//				if (!(this.hasDirectedSegment(OuterPoint.getKey(), value, segmentList))) {
+//					segmentList.add(tempSegment);
+//				}
+//			}
+//		}
+//		return segmentList;
+        Set<SegmentNode> set = new HashSet<>(this.asSegmentList());
+        return new ArrayList<>(set);
 	}
 	
 	
