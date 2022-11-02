@@ -46,7 +46,7 @@ public class PointNamingFactory
 	{
 		_database = new LinkedHashMap<Point, Point>();
 		for (Point p : points) {
-			_database.put(p, p);
+			_database.put(p, p); // call own put
 		}
 	}
 
@@ -101,7 +101,7 @@ public class PointNamingFactory
 	{
 		for(Point dbPoint : _database.keySet())
 		{
-			if(dbPoint._x == x && dbPoint._y == y)
+			if(dbPoint._x == x && dbPoint._y == y) // implement point equals and use it!
 			{
 				return dbPoint;
 			}
@@ -129,7 +129,7 @@ public class PointNamingFactory
 	 *         
 	 *         The exception is that a valid name can overwrite an unnamed point.
 	 */
-	private Point lookupExisting(String name, double x, double y)
+	private Point lookupExisting(String name, double x, double y) // call create
 	{
 		Point pPoint = new Point(name, x, y);
 		return get(pPoint); 
@@ -171,7 +171,7 @@ public class PointNamingFactory
 	{ 		
 		for(Point point: _database.keySet())
 		{
-			if(point._x == x && point._y == y) return true;
+			if(point._x == x && point._y == y) return true; // point equals
 		}
 		
 		return false;
@@ -186,7 +186,7 @@ public class PointNamingFactory
 
 		for(Point point: _database.keySet())
 		{
-			if(point == p) return true;
+			if(point == p) return true; // point equals
 		}
 		return false;
 	}

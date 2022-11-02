@@ -87,7 +87,7 @@ public class Point implements Comparable<Point>
 		return 0;
 	}
 
-	
+	// need equals method
 	
 	
 	@Override

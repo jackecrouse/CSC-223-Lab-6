@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class PointDatabaseTest {
 	
-	public PointDatabase Builder()
+	public PointDatabase builder()
 	{
 		ArrayList<Point> arr = new ArrayList<Point>();
 		Point p1 = new Point("A",0,0);
@@ -111,7 +111,7 @@ class PointDatabaseTest {
 	@Test
 	void testGetNameDoubleDouble() {
 		
-		PointDatabase pdb = Builder(); 
+		PointDatabase pdb = builder(); 
 		
 		assertEquals("A", pdb.getName(0, 0));
 		assertEquals("B", pdb.getName(0, 1));
