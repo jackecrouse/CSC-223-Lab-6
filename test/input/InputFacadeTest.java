@@ -20,6 +20,7 @@ import input.components.point.PointNodeDatabase;
 import input.components.segment.SegmentNode;
 import input.components.segment.SegmentNodeDatabase;
 import input.visitor.UnparseVisitor;
+import utilities.io.input.InputFacade;
 
 public class InputFacadeTest {
 
