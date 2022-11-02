@@ -42,7 +42,7 @@ public class InputFacadeTest {
 		PointDatabase expected = new PointDatabase(Arrays.asList(new Point(0.0, 1.0)));
 		PointDatabase actual = InputFacade.getPointDatabaseFromFigure(figure);
 		
-		assertEquals(expected, actual);
+		assertTrue(new Point(0.0, 1.0).compareTo(actual.getPoint(0.0, 1.0)) == 0);
 	}
 	
 	@Test
@@ -52,23 +52,13 @@ public class InputFacadeTest {
 				new PointNode(1.0, 1.0),
 				new PointNode(1.0, 0.0)));
 		FigureNode figure = new FigureNode("desc", pdb, null);
-		
-//		PointDatabase expected = new PointDatabase(Arrays.asList(
-//				new Point(0.0, 1.0),
-//				new Point(1.0, 1.0),
-//				new Point(1.0, 0.0)));
-		PointDatabase actual = InputFacade.getPointDatabaseFromFigure(figure);
 
-		//assertEquals(expected, actual);
+		PointDatabase actual = InputFacade.getPointDatabaseFromFigure(figure);
 		
-		assertTrue(new Point(0.0, 1.0).equals(actual.getPoint(0.0, 1.0)));
-		assertTrue(new Point(1.0, 1.0).equals(actual.getPoint(1.0, 1.0)));
-		assertTrue(new Point(1.0, 0.0).equals(actual.getPoint(1.0, 0.0)));
+		assertTrue(new Point(0.0, 1.0).compareTo(actual.getPoint(0.0, 1.0)) == 0);
+		assertTrue(new Point(1.0, 1.0).compareTo(actual.getPoint(1.0, 1.0)) == 0);
+		assertTrue(new Point(1.0, 0.0).compareTo(actual.getPoint(1.0, 0.0)) == 0);
 	}
-	
-	
-	
-	
 	
 	@Test
 	void test_getSegmentSetFromFigure_oneSegment() {
